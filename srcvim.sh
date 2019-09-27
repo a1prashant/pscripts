@@ -6,7 +6,7 @@
 
 set -x
 
-cmd_find="find ."
+cmd_find="find . "
 is_prev_name=false
 INDEXFILE="cscope.files"
 
@@ -24,6 +24,9 @@ do
     find_params="$find_params -name \"*.$i\" -o -name \"$i\""
     is_prev_name=true
 done
+
+# consider only files, not directories
+find_params="$find_params -type f ! -type d"
 
 cmd_find="$cmd_find $find_params"
 eval $cmd_find > "$INDEXFILE"
