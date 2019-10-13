@@ -10,5 +10,4 @@ echo "$BASEDIR"
 alias srcvim="~/pscripts/srcvim.sh"
 alias srcgrep="~/pscripts/srcgrep.sh"
 
-# declare -a pscripts_src_files=("*.cpp" "*.h" "BUILD" "CMakeLists.txt")
 pscripts_src_files=("cpp" "h" "BUILD" "CMakeListstxt")

@@ -4,7 +4,7 @@
 # usage: srcvim cpp h BUILD
 # author: a1prashant
 
-set -x
+set +x
 
 declare -a use_src_file_names
 use_src_file_names="( "$@" )"
