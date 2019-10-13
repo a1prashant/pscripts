@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # file: srcvim.sh
 # info: Recursively opens source files whose extension/s is/are mentioned
 # usage: srcvim cpp h BUILD
@@ -6,29 +6,29 @@
 
 set -x
 
-cmd_find="find . "
-is_prev_name=false
+declare -a use_src_file_names
+use_src_file_names="( "$@" )"
+
+source ~/pscripts/include-pscripts.sh
+source ~/pscripts/_utility-funcs.sh
+
 INDEXFILE="cscope.files"
 
 if [ "$#" -eq 0 ]; then
-    cmd_find="$cmd_find -name \"*.cpp\" -o -name \"*.h\""
-    echo "No arguments, considering cpp, h file extensions"
+    number_of_preset_src_files=${#pscripts_src_files[@]}
+    if [ "$number_of_preset_src_files=" = 0 ]; then
+        echo "No args provided, pscripts_src_files is empty, defaulting to cpp, h file extensions"
+        use_src_file_names=("*.cpp" "*.h")
+    else
+        echo "No args provided, using {pscripts_src_files}: ${pscripts_src_files}"
+        use_src_file_names=${pscripts_src_files[@]}
+    fi
 fi
 
+get_find_cmd_for_names true "$use_src_file_names"
+cmd_find=$find_cmd
+
 echo "Finding files..."
-for i in "$@"
-do
-    if [ "$is_prev_name" = true ]; then
-        find_params="$find_params -o "
-    fi
-    find_params="$find_params -name \"*.$i\" -o -name \"$i\""
-    is_prev_name=true
-done
-
-# consider only files, not directories
-find_params="$find_params -type f ! -type d"
-
-cmd_find="$cmd_find $find_params"
 eval $cmd_find > "$INDEXFILE"
 
 echo "Creating cscope DB..."
@@ -50,3 +50,4 @@ rm cscope.*
 
 echo "Deleting ctags related file..."
 rm tags
+
