@@ -28,3 +28,21 @@ function get_find_cmd_for_names
     find_cmd="find . $find_params"
 }
 
+function run() {
+    local cmd="$1 >> "$out_file" 2>&1"
+    eval "$cmd"
+    return $?
+}
+
+function rm_remake_dir() {
+    if [ -d $build_dir ];
+    then
+        echo "dir exists - removing"
+        local cmd="rm -rf $1 ; mkdir $1 ; sleep 1"
+        run "$cmd"
+        return $?
+    else
+        echo "dir was NOT present"
+    fi
+}
+

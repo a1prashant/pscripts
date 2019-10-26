@@ -21,5 +21,8 @@ fi
 
 use_src_file_names=${pscripts_src_files[@]}
 get_find_cmd_for_names true "$use_src_file_names"
-cmd_find=$find_cmd | grep "$@"
+eval $find_cmd | xargs grep "$@"
+
+# OTHER WAY TO DO THIS IS:
+# grep --include \*.h* --include \*.cpp ... "$@"
 
