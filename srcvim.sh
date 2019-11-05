@@ -7,7 +7,7 @@
 set +x
 
 declare -a use_src_file_names
-use_src_file_names="( "$@" )"
+use_src_file_names=" $@ "
 
 source ~/pscripts/include-pscripts.sh
 source ~/pscripts/_utility-funcs.sh
@@ -18,7 +18,7 @@ if [ "$#" -eq 0 ]; then
     number_of_preset_src_files=${#pscripts_src_files[@]}
     if [ "$number_of_preset_src_files=" = 0 ]; then
         echo "No args provided, pscripts_src_files is empty, defaulting to cpp, h file extensions"
-        use_src_file_names=("*.cpp" "*.h")
+        use_src_file_names=( "*.cpp" "*.h" )
     else
         echo "No args provided, using {pscripts_src_files}: ${pscripts_src_files}"
         use_src_file_names=${pscripts_src_files[@]}
