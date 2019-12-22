@@ -1,0 +1,44 @@
+My useful commands:
+
+TODO:
+Have something for these commands that I use very often:
+(1)
+`find ... | xargs sed -i 's|a/b/c|x/y/z|g'`
+a/b/c will be replaced with x/y/z
+
+(2)
+`find ... | xargs sed -i 's/abc/xyz/g'`
+it doesn't matter to sed what separator is used.
+
+(3)
+grep -r "one\|two\|three"
+
+(4)
+grep -r ... | cut -d ':' -f 1 | uniq
+
+(5) few of my git favorites
+git checkout master
+git pull --rebase
+git checkout FEATURE
+git rebase master
+-
+vim abc.cpp // if abc.cpp has conflicts
+git add abc.cpp
+git rebase --continue (or --abort if you want to discontinue)
+-
+// after rebase completed you have to force push.
+git push -f origin FEATURE
+-
+squash:
+git rebase -i HEAD~<N>
+here, <N> is number of commits that you want to squash
+git push --force-with-lease origin FEATURE
+-
+git log --oneline
+-
+if, encountered problem must have been pointers,
+    git lfs uninstall ; git reset --hard ; git lfs install ; git lfs pull
+-
+git stash list
+git stash apply
+git diff COMMIT1..COMMIT2
