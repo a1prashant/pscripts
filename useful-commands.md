@@ -1,22 +1,35 @@
-My useful commands:
+# My useful commands:
 
-TODO:
-Have something for these commands that I use very often:
-(1)
-`find ... | xargs sed -i 's|a/b/c|x/y/z|g'`
+### Find and Replace
+```
+`find . -name "*.h" | xargs sed -i 's|a/b/c|x/y/z|g'`
+```
 a/b/c will be replaced with x/y/z
 
-(2)
-`find ... | xargs sed -i 's/abc/xyz/g'`
+*Note*
+```
+find . -name "*.cpp" | xargs sed -i 's/abc/xyz/g'`
+```
 it doesn't matter to sed what separator is used.
 
-(3)
+### Find any (or'ed) of multiple words
+```
 grep -r "one\|two\|three"
+```
 
-(4)
+### split based on delimiter
+```
 grep -r ... | cut -d ':' -f 1 | uniq
+```
 
-(5) few of my git favorites
+### useful rev (and double rev) during find and cut
+```
+grep -r ... | rev | cut -d ':' -f 1 | rev | uniq
+```
+
+
+### Rebase with master
+```
 git checkout master
 git pull --rebase
 git checkout FEATURE
@@ -29,16 +42,21 @@ git rebase --continue (or --abort if you want to discontinue)
 // after rebase completed you have to force push.
 git push -f origin FEATURE
 -
-squash:
+*squash:*
 git rebase -i HEAD~<N>
 here, <N> is number of commits that you want to squash
 git push --force-with-lease origin FEATURE
 -
 git log --oneline
 -
+```
+
+### Other
 if, encountered problem must have been pointers,
-    git lfs uninstall ; git reset --hard ; git lfs install ; git lfs pull
+```
+git lfs uninstall ; git reset --hard ; git lfs install ; git lfs pull
 -
 git stash list
 git stash apply
 git diff COMMIT1..COMMIT2
+```
