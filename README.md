@@ -66,7 +66,9 @@ git push -f origin FEATURE
 *squash:*
 git rebase -i HEAD~<N>
 here, <N> is number of commits that you want to squash
-git push --force-with-lease origin FEATURE
+# editor opens; replace 'pick' with 'squash' (except for 1st)
+# save and close file, edit commit message and save
+git push --force-with-lease origin [FEATURE]
 -
 git log --oneline
 -
